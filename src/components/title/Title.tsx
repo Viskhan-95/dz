@@ -1,12 +1,36 @@
-import { StyleSheet, Text, TextProps } from "react-native";
+import { Animated, StyleSheet, TextProps } from "react-native";
 import { Sizes } from "../../constants/sizes";
 import { Colors } from "../../constants/colors";
 
-const Title = ({text, ...props}: TextProps & {text: string}) => {
+const Title = ({ text, ...props }: TextProps & { text: string }) => {
+    const animatedValue = new Animated.Value(-100);
+    const opacity = animatedValue.interpolate({
+        inputRange: [-100, 0],
+        outputRange: [0, 1],
+    });
+
+    const onEnter = () => {
+        Animated.timing(animatedValue, {
+            toValue: 0,
+            duration: 1500,
+            useNativeDriver: true,
+        }).start();
+    };
+
     return (
-        <Text style={styles.title} {...props}>{text}</Text>
-    )
-}
+        <Animated.Text
+            style={{
+                ...styles.title,
+                transform: [{ translateY: animatedValue }],
+                opacity: opacity,
+            }}
+            onLayout={onEnter}
+            {...props}
+        >
+            {text}
+        </Animated.Text>
+    );
+};
 
 export default Title;
 
