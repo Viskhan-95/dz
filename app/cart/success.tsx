@@ -7,7 +7,7 @@ export default function CartSuccess() {
 		<View style={styles.container}>
 			<Text>Поздравляем!</Text>
 			<Text>Ваш заказ успешно оформлен</Text>
-			<Link href="/products" asChild>
+			<Link href="/catalog" asChild>
 				<Button title="В каталог" />
 			</Link>
 		</View>

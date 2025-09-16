@@ -11,7 +11,7 @@ export default function Catalog() {
 			<Link href={'/address'} asChild>
 				<Button title="Изменить адрес" />
 			</Link>
-			<Link href={`/products/${id}`} asChild>
+			<Link href={`/catalog/${id}`} asChild>
 				<Button title="Посмотреть" />
 			</Link>
 		</View>

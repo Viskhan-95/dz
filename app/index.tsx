@@ -6,8 +6,24 @@ import { Padding } from '../constants/sizes';
 import Subtitle from '../shared/subtitle/Subtitle';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Link, SplashScreen } from 'expo-router';
+import { useFonts } from 'expo-font';
+import { useEffect } from 'react';
 
 export default function WelcomeScreen() {
+	const [loaded] = useFonts({
+		'Sora-Bold': require('../assets/fonts/Sora-Bold.ttf'),
+		'Sora-SemiBold': require('../assets/fonts/Sora-SemiBold.ttf'),
+		'Sora-Regular': require('../assets/fonts/Sora-Regular.ttf'),
+	});
+
+	useEffect(() => {
+		if (loaded) {
+			SplashScreen.hideAsync();
+		}
+	}, [loaded]);
+
+	if (!loaded) return null;
+
 	return (
 		<View style={styles.container}>
 			<ImageBackground source={require('../assets/images/background.png')} style={styles.image} />
@@ -15,7 +31,7 @@ export default function WelcomeScreen() {
 				<View style={styles.content}>
 					<Title text="Одно из самых вкусных кофе в городе!" />
 					<Subtitle text="Свежие зёрна, настоящая арабика и бережная обжарка" />
-					<Link href="/products" asChild>
+					<Link href="/catalog" asChild>
 						<Button title="Начать" />
 					</Link>
 				</View>
