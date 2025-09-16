@@ -1,12 +1,13 @@
-import { ImageBackground, StyleSheet, View } from 'react-native';
-import Button from '../components/button/Button';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import Button from '../shared/button/Button';
 import { Colors } from '../constants/colors';
-import Title from '../components/title/Title';
+import Title from '../shared/title/Title';
 import { Padding } from '../constants/sizes';
-import Subtitle from '../components/subtitle/Subtitle';
+import Subtitle from '../shared/subtitle/Subtitle';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Link, SplashScreen } from 'expo-router';
 
-const WelcomeScreen = () => {
+export default function WelcomeScreen() {
 	return (
 		<View style={styles.container}>
 			<ImageBackground source={require('../assets/images/background.png')} style={styles.image} />
@@ -14,14 +15,14 @@ const WelcomeScreen = () => {
 				<View style={styles.content}>
 					<Title text="Одно из самых вкусных кофе в городе!" />
 					<Subtitle text="Свежие зёрна, настоящая арабика и бережная обжарка" />
-					<Button title="Начать" />
+					<Link href="/products" asChild>
+						<Button title="Начать" />
+					</Link>
 				</View>
 			</SafeAreaView>
 		</View>
 	);
-};
-
-export default WelcomeScreen;
+}
 
 const styles = StyleSheet.create({
 	container: {

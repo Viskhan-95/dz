@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
         marginTop: Margin.m14,
     },
     buttonText: {
+        fontFamily: 'Sora-SemiBold',
         color: Colors.white,
         fontSize: Sizes.s16,
         textAlign: "center",

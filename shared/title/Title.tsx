@@ -36,6 +36,7 @@ export default Title;
 
 const styles = StyleSheet.create({
 	title: {
+		fontFamily: 'Sora-SemiBold',
 		fontSize: Sizes.s34,
 		fontWeight: '600',
 		color: Colors.white,

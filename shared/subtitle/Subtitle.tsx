@@ -14,6 +14,7 @@ export default Subtitle;
 
 const styles = StyleSheet.create({
 	subtitle: {
+		fontFamily: 'Sora-Regular',
 		fontSize: Sizes.s14,
 		fontWeight: '400',
 		color: Colors.text,
