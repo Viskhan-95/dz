@@ -1,10 +1,9 @@
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import Button from '../shared/button/Button';
 import { Colors } from '../constants/colors';
-import Title from '../shared/title/Title';
-import { Padding } from '../constants/sizes';
-import Subtitle from '../shared/subtitle/Subtitle';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { BorderRadius, Margin, Padding, Sizes } from '../constants/sizes';
+import AnimatedText from '../shared/animatedText/AnimatedText';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Link, SplashScreen } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
@@ -27,15 +26,17 @@ export default function WelcomeScreen() {
 	return (
 		<View style={styles.container}>
 			<ImageBackground source={require('../assets/images/background.png')} style={styles.image} />
-			<SafeAreaView style={styles.area}>
+			<SafeAreaProvider style={styles.area}>
 				<View style={styles.content}>
-					<Title text="Одно из самых вкусных кофе в городе!" />
-					<Subtitle text="Свежие зёрна, настоящая арабика и бережная обжарка" />
+					<AnimatedText text="Одно из самых вкусных кофе в городе!" />
+					<Text style={styles.subtitle}>Свежие зёрна, настоящая арабика и бережная обжарка</Text>
 					<Link href="/catalog" asChild>
-						<Button title="Начать" />
+						<Button padding={Padding.p20} borderRadius={BorderRadius.b16} >
+							<Text>Начать</Text>
+						</Button>
 					</Link>
 				</View>
-			</SafeAreaView>
+			</SafeAreaProvider>
 		</View>
 	);
 }
@@ -60,5 +61,15 @@ const styles = StyleSheet.create({
 	content: {
 		height: '42%',
 		rowGap: Padding.p10,
+	},
+	subtitle: {
+		fontFamily: 'Sora-Regular',
+		fontSize: Sizes.s14,
+		fontWeight: '400',
+		color: Colors.text,
+		textAlign: 'center',
+		paddingHorizontal: Padding.p20,
+		marginBottom: Margin.m20,
+		lineHeight: Sizes.s14 * 1.5,
 	},
 });
