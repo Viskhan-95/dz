@@ -8,7 +8,7 @@ export default function ProductPage() {
 		<View style={styles.container}>
 			<Text>О продукте</Text>
 			<Link href={'/cart'} asChild>
-				<Button title="В корзину" />
+				<Button>В корзину</Button>
 			</Link>
 		</View>
 	);

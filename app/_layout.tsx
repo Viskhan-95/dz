@@ -8,9 +8,10 @@ export default function RootLayout() {
 			<StatusBar style="light" backgroundColor='#000' translucent={false}/>
 
 			<Stack screenOptions={{ headerShown: false }}>
-				<Stack.Screen name="index" />
+				{/* <Stack.Screen name="index" />
 				<Stack.Screen name="catalog/index" />
-				<Stack.Screen name="address" />
+				<Stack.Screen name="address" /> */}
+				<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 			</Stack>
 		</>
 	);

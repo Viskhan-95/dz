@@ -7,7 +7,7 @@ export default function Cart() {
 		<View style={styles.container}>
 			<Text>Cart</Text>
 			<Link href="/cart/success" asChild>
-				<Button title="Оформить заказ" />
+				<Button>Оформить заказ</Button>
 			</Link>
 		</View>
 	);

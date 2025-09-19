@@ -6,10 +6,8 @@ import { Colors } from '../../constants/colors';
 import { Gap, Padding } from '../../constants/sizes';
 import Category from '../../shared/category/Category';
 import { categories } from '../../utils/db';
-import { useAtom, useAtomValue } from 'jotai';
-import { visibleProductsLoadableAtom } from '../../entities/product/api/api';
+import { useAtom } from 'jotai';
 import { selectedTypeAtom, searchTextAtom } from '../../entities/product/model/product.state';
-import Card from '../../shared/card/Card';
 import CardsGrid from '../../entities/product/ui/CardsGrid';
 
 export default function Catalog() {
