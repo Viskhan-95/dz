@@ -60,7 +60,7 @@ export default function Catalog() {
 					))}
 				</View>
 				<View style={styles.products}>
-					<CardsGrid />
+					<CardsGrid onPress={(id) => router.push(`/catalog/${id}`)} />
 				</View>
 			</View>
 		</View>

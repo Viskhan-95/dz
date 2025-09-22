@@ -16,6 +16,7 @@ export const BorderRadius = {
 	b14: 14,
 	b16: 16,
 	b18: 18,
+	b24: 24,
 };
 
 export const Padding = {
@@ -27,6 +28,7 @@ export const Padding = {
 	p16: 16,
 	p18: 18,
 	p20: 20,
+	p24: 24,
 	p30: 30,
 	p40: 40,
 };

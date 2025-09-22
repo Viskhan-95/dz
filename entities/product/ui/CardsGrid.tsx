@@ -5,7 +5,7 @@ import { useAtomValue } from 'jotai';
 import { visibleProductsLoadableAtom } from '../api/api';
 import Card from '../../../shared/card/Card';
 
-function CardsGridInner() {
+function CardsGridInner({ onPress }: { onPress: (id: number) => void }) {
 	const products = useAtomValue(visibleProductsLoadableAtom);
 
 	if (products.state === 'loading') return <Text>Загрузка...</Text>;
@@ -22,6 +22,7 @@ function CardsGridInner() {
 					title={item.name}
 					subtitle={item.subTitle}
 					price={String(item.price)}
+					onPress={() => onPress(item.id)}
 				/>
 			))}
 		</View>

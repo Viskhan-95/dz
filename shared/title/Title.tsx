@@ -5,18 +5,19 @@ export default function Title({
 	text,
 	textSize = 16,
 	textAlign = 'left',
+	color = Colors.title,
 }: {
 	text: string;
 	textSize: number;
 	textAlign: 'left' | 'center' | 'right';
+	color?: string;
 }) {
-	return <Text style={{ ...styles.title, fontSize: textSize, textAlign }}>{text}</Text>;
+	return <Text style={{ ...styles.title, fontSize: textSize, textAlign, color }}>{text}</Text>;
 }
 
 const styles = StyleSheet.create({
 	title: {
 		fontFamily: 'Sora-SemiBold',
 		fontWeight: '600',
-		color: Colors.title,
 	},
 });

@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { loadable } from 'jotai/utils';
+import { loadable, atomFamily } from 'jotai/utils';
 import { http } from '../../../shared/http';
 import type { Product } from '../model/product.state';
 import { selectedTypeAtom, searchTextAtom } from '../model/product.state';
@@ -43,3 +43,32 @@ export const visibleProductsLoadableAtom = atom<LoadableData<Product[]>>((get) =
 	const res = get(serverProductsLoadableAtom);
 	return res.state !== 'hasData' ? res : { state: 'hasData', data: res.data };
 });
+
+// Базовый atomFamily: обращается к `coffee-api/id/:id`
+export const productByIdBaseAtomFamily = atomFamily((id: number | string) =>
+	atom(async () => {
+		try {
+			const { data } = await http.get<Product>(`id/${id}`, {
+				validateStatus: (s) => (s >= 200 && s < 300) || s === 404,
+			});
+			// Если сервер вернул 404, http.get бросит или вернет undefined в data по настройкам
+			return data ?? null;
+		} catch (e) {
+			if (axios.isAxiosError(e) && e.response?.status === 404) {
+				return null;
+			}
+			throw e;
+		}
+	}),
+);
+
+// Loadable-обертка для удобного использования в UI
+export const productByIdLoadableAtom = (id: number | string) =>
+	loadable(productByIdBaseAtomFamily(id));
+
+// --- Хук для использования в компонентах ---
+export const createUseProductById = (useStore?: Parameters<typeof atom>[0]) => {
+	return (id: number | string) => {
+		return productByIdLoadableAtom(id);
+	};
+};

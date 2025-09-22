@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
+import { Colors } from '../constants/colors';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -23,7 +24,11 @@ export default function RootLayout() {
 
 	return (
 		<>
-			<StatusBar style="light" backgroundColor="#000" translucent={false} />
+			<StatusBar
+				style="light"
+				backgroundColor="#000"
+				translucent={false}
+			/>
 
 			<Stack screenOptions={{ headerShown: false }}>
 				<Stack.Screen name="index" />
@@ -37,6 +42,6 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: 'white',
+		backgroundColor: Colors.secondary,
 	},
 });

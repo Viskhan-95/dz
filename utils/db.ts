@@ -25,3 +25,21 @@ export const categories = [
 		type: 'americano',
 	},
 ];
+
+export const sizes = [
+	{
+		id: 1,
+		name: 'S',
+		price: 240,
+	},
+	{
+		id: 2,
+		name: 'M',
+		price: 270,
+	},
+	{
+		id: 3,
+		name: 'L',
+		price: 300,
+	},
+];

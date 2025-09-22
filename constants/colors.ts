@@ -13,4 +13,7 @@ export const Colors = {
 	textAddressTitle: '#B7B7B7',
 	textAddressText: '#DDDDDD',
 	border: '#EAEAEA',
+	borderSecondary: '#DEDEDE',
+	backgroundButton: '#FFF5EE',
+	backgroundFooter: '#E4E4E440',
 };

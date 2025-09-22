@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { Colors } from '../../constants/colors';
 import { BorderRadius, Margin, Padding, Sizes } from '../../constants/sizes';
 import Title from '../title/Title';
@@ -12,22 +12,28 @@ export default function Card({
 	subtitle,
 	price,
 	rating,
+	onPress,
 }: {
 	image: string;
 	title: string;
 	subtitle: string;
 	price: string;
 	rating: number;
+	onPress?: () => void;
 }) {
 	const { width } = useWindowDimensions();
 	const cardWidth = (width - 36) / 2;
 
 	return (
-		<View style={[styles.container, { width: cardWidth }]}>
+		<Pressable
+			style={[styles.container, { width: cardWidth }]}
+			onPress={onPress}
+			disabled={!onPress}
+		>
 			<Image source={{ uri: image }} style={styles.image} />
 			<Rating rating={rating} />
 			<View style={styles.content}>
-				<Title text={title} />
+				<Title text={title} textSize={16} textAlign="left" />
 				<Subtitle text={subtitle} />
 			</View>
 			<View style={styles.footerContent}>
@@ -40,7 +46,7 @@ export default function Card({
 					</Button>
 				</View>
 			</View>
-		</View>
+		</Pressable>
 	);
 }
 
