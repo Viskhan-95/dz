@@ -10,4 +10,7 @@ export const Colors = {
 	primaryHover: '#A76237',
 	placeholder: '#989898',
 	textSecondary: '#2F4B4E',
+	textAddressTitle: '#B7B7B7',
+	textAddressText: '#DDDDDD',
+	border: '#EAEAEA',
 };

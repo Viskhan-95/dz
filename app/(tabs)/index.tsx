@@ -1,18 +1,22 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import Input from '../../shared/input/Input';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Title from '../../shared/title/Title';
 import { Colors } from '../../constants/colors';
-import { Gap, Padding } from '../../constants/sizes';
+import { Gap, Padding, Sizes } from '../../constants/sizes';
 import Category from '../../shared/category/Category';
 import { categories } from '../../utils/db';
 import { useAtom } from 'jotai';
 import { selectedTypeAtom, searchTextAtom } from '../../entities/product/model/product.state';
 import CardsGrid from '../../entities/product/ui/CardsGrid';
+import Button from '../../shared/button/Button';
+import { useAddress, useAddressLoadable } from '../../entities/address/model/address.hooks';
+import { router } from 'expo-router';
 
 export default function Catalog() {
 	const [selectedType, setSelectedType] = useAtom(selectedTypeAtom);
 	const [search, setSearch] = useAtom(searchTextAtom);
+	const address = useAddress();
+	const addressLoadable = useAddressLoadable();
 
 	const handleCategorySelect = (type: string) => setSelectedType(type);
 	const onChangeSearch = (text: string) => setSearch(text);
@@ -21,8 +25,27 @@ export default function Catalog() {
 		<View style={styles.container}>
 			<SafeAreaView style={styles.area}>
 				<View style={styles.header}>
-					<Title text="Адрес доставки" />
-					<Input placeholder="Поиск" value={search} onChangeText={onChangeSearch} />
+					<View style={styles.addressContainer}>
+						<Text style={styles.addressTitle}>Адрес</Text>
+						<View style={styles.addressTextContainer}>
+							<Text style={styles.addressText}>
+								{addressLoadable.state === 'loading'
+									? 'Загрузка...'
+									: address?.fullAddress || 'Не указан'}
+							</Text>
+							<Button backgroundColor={Colors.black} onPress={() => router.push('/address')}>
+								<Image source={require('../../assets/icons/edit.png')} />
+							</Button>
+						</View>
+					</View>
+					<Input
+						placeholder="Поиск"
+						value={search}
+						onChangeText={onChangeSearch}
+						icon={require('../../assets/icons/search.png')}
+						backgroundColor={Colors.background}
+						color={Colors.white}
+					/>
 				</View>
 			</SafeAreaView>
 			<View style={styles.content}>
@@ -54,7 +77,26 @@ const styles = StyleSheet.create({
 	},
 	header: {
 		gap: Gap.g28,
-		paddingTop: Padding.p20,
+		paddingHorizontal: Padding.p30,
+	},
+	addressContainer: {
+		gap: Gap.g4,
+	},
+	addressTitle: {
+		fontFamily: 'Sora-Regular',
+		fontWeight: '400',
+		fontSize: Sizes.s12,
+		color: Colors.textAddressTitle,
+	},
+	addressTextContainer: {
+		flexDirection: 'row',
+		gap: Gap.g4,
+	},
+	addressText: {
+		fontFamily: 'Sora-SemiBold',
+		fontWeight: '600',
+		fontSize: Sizes.s14,
+		color: Colors.textAddressText,
 	},
 	content: {
 		flex: 1,

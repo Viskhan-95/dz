@@ -16,6 +16,9 @@ const Button = ({
 	height,
 	borderRadius,
 	padding,
+	backgroundColor,
+	borderColor,
+	borderWidth,
 	...props
 }: PressableProps & {
 	children?: ReactNode;
@@ -23,11 +26,14 @@ const Button = ({
 	height?: number | undefined;
 	borderRadius?: number;
 	padding?: number;
+	backgroundColor?: string;
+	borderColor?: string;
+	borderWidth?: number;
 }) => {
 	const animatedValue = new Animated.Value(100);
 	const color = animatedValue.interpolate({
 		inputRange: [0, 100],
-		outputRange: [Colors.primaryHover, Colors.primary],
+		outputRange: [Colors.primaryHover, backgroundColor ?? Colors.primary],
 	});
 
 	const fadeIn = (e: GestureResponderEvent) => {
@@ -56,7 +62,7 @@ const Button = ({
 				onPressIn={fadeIn}
 				onPressOut={fadeOut}
 				{...props}
-				style={{ width, height, padding }}
+				style={{ width, height, padding, borderColor, borderWidth, borderRadius }}
 			>
 				<Text style={styles.buttonText}>{children}</Text>
 			</Pressable>
@@ -68,7 +74,6 @@ export default Button;
 
 const styles = StyleSheet.create({
 	button: {
-		backgroundColor: Colors.primary,
 		justifyContent: 'center',
 	},
 	buttonText: {

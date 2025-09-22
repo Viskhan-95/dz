@@ -4,25 +4,9 @@ import { Colors } from '../constants/colors';
 import { BorderRadius, Margin, Padding, Sizes } from '../constants/sizes';
 import AnimatedText from '../shared/animatedText/AnimatedText';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Link, SplashScreen } from 'expo-router';
-import { useFonts } from 'expo-font';
-import { useEffect } from 'react';
+import { Link } from 'expo-router';
 
 export default function WelcomeScreen() {
-	const [loaded] = useFonts({
-		'Sora-Bold': require('../assets/fonts/Sora-Bold.ttf'),
-		'Sora-SemiBold': require('../assets/fonts/Sora-SemiBold.ttf'),
-		'Sora-Regular': require('../assets/fonts/Sora-Regular.ttf'),
-	});
-
-	useEffect(() => {
-		if (loaded) {
-			SplashScreen.hideAsync();
-		}
-	}, [loaded]);
-
-	if (!loaded) return null;
-
 	return (
 		<View style={styles.container}>
 			<ImageBackground source={require('../assets/images/background.png')} style={styles.image} />
@@ -30,8 +14,9 @@ export default function WelcomeScreen() {
 				<View style={styles.content}>
 					<AnimatedText text="Одно из самых вкусных кофе в городе!" />
 					<Text style={styles.subtitle}>Свежие зёрна, настоящая арабика и бережная обжарка</Text>
-					<Link href="/catalog" asChild>
-						<Button padding={Padding.p20} borderRadius={BorderRadius.b16} >
+					<Link href="/(tabs)" asChild>
+						{/* <Link href="/cart/order" asChild> */}
+						<Button padding={Padding.p20} borderRadius={BorderRadius.b16} borderWidth={0}>
 							<Text>Начать</Text>
 						</Button>
 					</Link>

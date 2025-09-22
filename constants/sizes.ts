@@ -28,6 +28,7 @@ export const Padding = {
 	p18: 18,
 	p20: 20,
 	p30: 30,
+	p40: 40,
 };
 
 export const Margin = {
@@ -45,6 +46,7 @@ export const Margin = {
 
 export const Gap = {
 	g2: 2,
+	g4: 4,
 	g6: 6,
 	g8: 8,
 	g10: 10,
