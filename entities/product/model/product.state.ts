@@ -9,6 +9,7 @@ export type Product = {
 	image: string;
 	description: string;
 	rating: number;
+	size: string;
 };
 
 // Параметры фильтра

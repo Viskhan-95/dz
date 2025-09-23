@@ -19,6 +19,7 @@ const Button = ({
 	backgroundColor,
 	borderColor,
 	borderWidth,
+	onPress,
 	...props
 }: PressableProps & {
 	children?: ReactNode;
@@ -29,6 +30,7 @@ const Button = ({
 	backgroundColor?: string;
 	borderColor?: string;
 	borderWidth?: number;
+	onPress?: () =>  void;
 }) => {
 	const animatedValue = new Animated.Value(100);
 	const color = animatedValue.interpolate({
@@ -59,6 +61,7 @@ const Button = ({
 			style={{ ...styles.button, backgroundColor: color, width, height, borderRadius }}
 		>
 			<Pressable
+				onPress={onPress}
 				onPressIn={fadeIn}
 				onPressOut={fadeOut}
 				{...props}

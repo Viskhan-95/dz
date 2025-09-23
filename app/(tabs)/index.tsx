@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
 		gap: Gap.g10,
 	},
 	products: {
+		flex: 1,
 		flexDirection: 'row',
 		flexWrap: 'wrap',
 		gap: Gap.g12,

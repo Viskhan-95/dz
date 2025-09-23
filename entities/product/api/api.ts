@@ -11,8 +11,13 @@ type LoadableData<T> =
 	| { state: 'hasError'; error: unknown }
 	| { state: 'hasData'; data: T };
 
+// Триггер для ручного обновления списка товаров (увеличение числа перезапускает загрузку)
+const productsRefreshAtom = atom(0);
+
 // Единый запрос к серверу: all / по категории / по поиску / категория+поиск
 const serverProductsBaseAtom = atom(async (get) => {
+	// зависимость от триггера (перечитывание при ручном рефреше)
+	void get(productsRefreshAtom);
 	const type = get(selectedTypeAtom);
 	const text = get(searchTextAtom).trim();
 
@@ -65,6 +70,12 @@ export const productByIdBaseAtomFamily = atomFamily((id: number | string) =>
 // Loadable-обертка для удобного использования в UI
 export const productByIdLoadableAtom = (id: number | string) =>
 	loadable(productByIdBaseAtomFamily(id));
+
+// Экспортируем действие для ручного обновления с UI (pull-to-refresh)
+export const refreshProductsAtom = atom(null, (get, set) => {
+	const current = get(productsRefreshAtom);
+	set(productsRefreshAtom, current + 1);
+});
 
 // --- Хук для использования в компонентах ---
 export const createUseProductById = (useStore?: Parameters<typeof atom>[0]) => {

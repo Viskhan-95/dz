@@ -13,6 +13,7 @@ export default function Card({
 	price,
 	rating,
 	onPress,
+	onAdd,
 }: {
 	image: string;
 	title: string;
@@ -20,6 +21,7 @@ export default function Card({
 	price: string;
 	rating: number;
 	onPress?: () => void;
+	onAdd?: () => void;
 }) {
 	const { width } = useWindowDimensions();
 	const cardWidth = (width - 36) / 2;
@@ -41,7 +43,7 @@ export default function Card({
 					<Text style={styles.price}>{price} ₽</Text>
 				</View>
 				<View style={styles.button}>
-					<Button width={32} height={32} borderRadius={10} padding={Padding.p6}>
+					<Button width={32} height={32} borderRadius={10} padding={Padding.p6} onPress={onAdd}>
 						<Image source={require('../../assets/icons/add.png')} />
 					</Button>
 				</View>

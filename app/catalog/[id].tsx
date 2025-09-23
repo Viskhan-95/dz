@@ -11,11 +11,13 @@ import SizeButton from '../../shared/button/SizeButton';
 import { useState } from 'react';
 import { sizes } from '../../utils/db';
 import { StatusBar } from 'expo-status-bar';
+import { useAddToCart } from '../../entities/product/model/cart.hooks';
 
 export default function ProductPage() {
 	const { id } = useLocalSearchParams<{ id: string }>();
 	const productLoadable = useProductByIdLoadable(id!);
 	const [selectedSizeId, setSelectedSizeId] = useState<number>(sizes[1].id);
+	const addToCart = useAddToCart();
 
 	const handleSelectSize = (id: number) => {
 		setSelectedSizeId(id);
@@ -46,6 +48,19 @@ export default function ProductPage() {
 			</View>
 		);
 	}
+
+	const handleAddCart = () => {
+		const sizeLetter = sizes.find((s) => s.id === selectedSizeId)?.name ?? 'M';
+		const price = sizes.find((s) => s.id === selectedSizeId)?.price;
+		addToCart({
+			id: product.id,
+			name: product.name,
+			subTitle: product.subTitle,
+			image: product.image,
+			price: product.price + (price || 0),
+			size: sizeLetter,
+		});
+	};
 
 	return (
 		<View style={styles.container}>
@@ -91,14 +106,14 @@ export default function ProductPage() {
 							textSize={18}
 							textAlign="left"
 							color={Colors.primary}
-							text={`${sizes.find((size) => size.id === selectedSizeId)?.price} ₽`}
+							text={`${(sizes.find((size) => size.id === selectedSizeId)?.price || 0) + product.price} ₽`}
 						/>
 					</View>
 					<Button
 						backgroundColor={Colors.primary}
 						borderRadius={BorderRadius.b16}
 						padding={Padding.p24}
-						onPress={() => router.navigate('address')}
+						onPress={handleAddCart}
 					>
 						<Text>Добавить в корзину</Text>
 					</Button>

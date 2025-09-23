@@ -30,16 +30,16 @@ export const sizes = [
 	{
 		id: 1,
 		name: 'S',
-		price: 240,
+		price: -30,
 	},
 	{
 		id: 2,
 		name: 'M',
-		price: 270,
+		price: 0,
 	},
 	{
 		id: 3,
 		name: 'L',
-		price: 300,
+		price: 30,
 	},
 ];

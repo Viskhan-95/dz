@@ -16,4 +16,5 @@ export const Colors = {
 	borderSecondary: '#DEDEDE',
 	backgroundButton: '#FFF5EE',
 	backgroundFooter: '#E4E4E440',
+	disabled: '#AAADB0',
 };
