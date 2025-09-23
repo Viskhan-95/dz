@@ -1,0 +1,45 @@
+export const categories = [
+	{
+		id: 1,
+		name:  'Все',
+        "type": "all",
+	},
+	{
+		id: 2,
+		name:  'Капучино',
+        "type": "cappuccino",
+	},
+    {
+		id: 3,
+		name: 'Макиатто',
+		type: 'macchiato',
+	},
+    {
+		id: 4,
+		name: 'Латте',
+		type: 'latte',
+	},
+	{
+		id: 5,
+		name: 'Американо',
+		type: 'americano',
+	},
+];
+
+export const sizes = [
+	{
+		id: 1,
+		name: 'S',
+		price: -30,
+	},
+	{
+		id: 2,
+		name: 'M',
+		price: 0,
+	},
+	{
+		id: 3,
+		name: 'L',
+		price: 30,
+	},
+];
