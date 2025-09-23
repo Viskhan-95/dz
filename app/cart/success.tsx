@@ -6,8 +6,11 @@ import Title from '../../shared/title/Title';
 import { Colors } from '../../constants/colors';
 import { Padding } from '../../constants/sizes';
 import * as Notificaitons from 'expo-notifications';
+import { clearCartAtom } from '../../entities/product/api/cartApi';
+import { useSetAtom } from 'jotai';
 
 export default function CartSuccess() {
+	const clearCart = useSetAtom(clearCartAtom);
 	const allowsNotification = async () => {
 		const settings = await Notificaitons.getPermissionsAsync();
 		return (
@@ -31,10 +34,11 @@ export default function CartSuccess() {
 				data: { success: true },
 			},
 			trigger: {
-				seconds: 5,
+				seconds: 10,
 				type: Notificaitons.SchedulableTriggerInputTypes.TIME_INTERVAL,
 			},
 		});
+		clearCart();
 		router.push('(tabs)');
 	};
 	return (
