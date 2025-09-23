@@ -8,7 +8,7 @@ import {
 	Text,
 } from 'react-native';
 import { Colors } from '../../constants/colors';
-import { Padding, Sizes } from '../../constants/sizes';
+import { Sizes } from '../../constants/sizes';
 
 const Button = ({
 	children,

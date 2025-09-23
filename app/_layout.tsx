@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import { Colors } from '../constants/colors';
+import { Notificaiton } from '../shared/notification/Notification';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -24,11 +25,8 @@ export default function RootLayout() {
 
 	return (
 		<>
-			<StatusBar
-				style="light"
-				backgroundColor="#000"
-				translucent={false}
-			/>
+			<Notificaiton />
+			<StatusBar style="light" backgroundColor="#000" translucent={false} />
 
 			<Stack screenOptions={{ headerShown: false }}>
 				<Stack.Screen name="index" />

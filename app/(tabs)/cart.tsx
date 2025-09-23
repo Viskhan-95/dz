@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Title from '../../shared/title/Title';
@@ -11,6 +11,8 @@ import Subtitle from '../../shared/subtitle/Subtitle';
 import { useComment, useCommentLoadable } from '../../entities/address/model/comment.hooks';
 import CardCart from '../../shared/card/CardCart';
 import { useCart } from '../../entities/product/model/cart.hooks';
+import { useOrderPayload, usePostOrder } from '../../entities/order/model/order.hooks';
+import axios from 'axios';
 
 export default function Order() {
 	const addressLoadable = useAddressLoadable();
@@ -21,6 +23,19 @@ export default function Order() {
 
 	const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
 	const delivery = 100;
+
+	const payload = useOrderPayload();
+	const postOrder = usePostOrder();
+
+	const handleCreateOrder = async () => {
+		try {
+			const res = await postOrder({ address: address?.fullAddress?.trim() ?? '' });
+			router.navigate('cart/success');
+		} catch (e) {
+			console.log(e);
+			Alert.alert('Ошибка', 'Не удалось оформить заказ');
+		}
+	};
 
 	return (
 		<View style={styles.container}>
@@ -102,7 +117,7 @@ export default function Order() {
 						<Button
 							padding={Padding.p20}
 							borderRadius={BorderRadius.b16}
-							onPress={() => router.push('/')}
+							onPress={() => handleCreateOrder()}
 						>
 							<Text>Заказать</Text>
 						</Button>
